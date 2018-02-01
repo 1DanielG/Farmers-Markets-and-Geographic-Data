@@ -12,7 +12,7 @@ I added in interactivity, namely that a address, seasonal opening, opening hours
 
 You can zoom in to get a close-up view of the area or zoom out to see more of the map at a large scale.
 
-Feel free to view my script I ran through with more explanation (`code.R`).
+Feel free to view my script I ran through with more explanation (`code.R`) or some screenshots (`Rplot2, Rplot3 and Rplot4`) .
 
 
 
