@@ -23,9 +23,11 @@ library(readxl)
 library(leaflet)
 
 # data import
+
 market_data <- read_excel("Market_data.xlsx" , sheet = 1)
 
 # data selection
+
 market_sub1 <- market_data %>% 
   select(MarketName:County,Season1Date:WildHarvested) %>% 
   # tidy up data with gather::tidyr
@@ -38,7 +40,10 @@ market_sub1 <- market_data %>%
   # nesting product col 
   nest(product, .key = "product")
 
+
+
 # function to converts any list columns to character type
+
 set_lists_to_chars <- function(x) {
   if (class(x) == 'list') {
     y <- paste(unlist(x[1]), sep = '', collapse = ', ')
@@ -49,9 +54,9 @@ set_lists_to_chars <- function(x) {
 }
 
 # apply function to tibble with list columns:
+
 market_sub2 <- as.tibble(map(market_sub1, set_lists_to_chars))
 
-#saveRDS(market_sub2, "market_data_tidy.rds")
 
 # group data by Market name
 # using the leaflet package to map the data
@@ -66,6 +71,8 @@ market_sub2 <- as.tibble(map(market_sub1, set_lists_to_chars))
 # Season Date,
 # Season Time,
 # product list
+
+
 
 market_sub2 <- market_sub2 %>%
   group_by(MarketName) %>%
@@ -90,6 +97,8 @@ market_sub2 <- market_sub2 %>%
 # generate the map
 # set a longitude and latitude for the map and how zoomed in it should be
 # calling addTiles() with no arguments; by default, OpenStreetMap tiles are used.
+
+
 leaflet(data = market_sub2) %>% 
   setView(lng = -89.40123, lat = 43.07305, zoom = 10) %>% 
   addTiles() %>% 
